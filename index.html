@@ -2322,6 +2322,7 @@ function jobCard(j, onclick){
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end">
       ${readyBadge}${irBadge}
       ${canEdit ? `<button class="btn" style="padding:5px 10px;font-size:11px;white-space:nowrap" onclick="event.stopPropagation();editJob('${j.id}')"><i class="ti ti-pencil"></i> Edit</button>` : ''}
+      ${canEdit ? `<button class="btn danger" style="padding:5px 10px;font-size:11px;white-space:nowrap" onclick="event.stopPropagation();deleteJob('${j.id}')"><i class="ti ti-trash"></i></button>` : ''}
       <button class="btn" style="padding:5px 10px;font-size:11px;white-space:nowrap" onclick="event.stopPropagation();openArchive('${j.id}')"><i class="ti ti-archive"></i></button>
       <div class="status-badge ${statusClass[j.status]||'s-created'}">${statusLabel[j.status]||j.status}</div>
     </div>
