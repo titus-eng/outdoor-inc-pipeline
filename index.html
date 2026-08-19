@@ -2526,6 +2526,38 @@ function editJob(id){
     `<i class="ti ti-device-floppy"></i> Save changes`;
   showPanel('newjob', document.getElementById('nav-newjob'));
 }
+  async function deleteJob(id){
+  if(currentRole!=='admin'){ alert('Only admin can delete jobs.'); return; }
+  const j = JOBS.find(x=>x.id===id); if(!j) return;
+  if(!confirm(`Delete job ${id} — ${j.name}?\n\nThis will also release any reserved stock and remove linked service orders. Cannot be undone.`)) return;
+  if(!confirm(`Really sure? This permanently deletes ${id} for everyone.`)) return;
+
+  // Release any stock reserved against this job first
+  njReleaseStockReservations(id);
+
+  // Remove linked service orders locally
+  const linkedSvc = svcOrders.filter(o=>o.jobId===id);
+  svcOrders = svcOrders.filter(o=>o.jobId!==id);
+  saveSvcOrders();
+
+  JOBS = JOBS.filter(x=>x.id!==id);
+  saveJobs();
+
+  if(supabaseClient){
+    try{
+      // Delete linked rows first (foreign keys), then the job itself
+      if(linkedSvc.length) await supabaseClient.from('service_orders').delete().eq('job_id', id);
+      await supabaseClient.from('stock_reservations').delete().eq('job_id', id);
+      await supabaseClient.from('jobs').delete().eq('id', id);
+    }catch(e){
+      console.error('Supabase delete failed (jobs):', describeSupabaseError(e));
+      alert('Deleted locally, but Supabase delete failed: '+describeSupabaseError(e));
+    }
+  }
+
+  renderDashboard();
+  if(document.getElementById('panel-jobs')?.classList.contains('active')) renderAllJobs();
+}
 
 function resetNewJobForm(){
   _editingJobId = null;
