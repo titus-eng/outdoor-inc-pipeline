@@ -273,14 +273,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
           <div class="form-grid">
             <div class="field"><label>Customer name 姓名</label><input id="nj-name" placeholder="e.g. Tan Wei Ming" oninput="updateExcelLine()"></div>
             <div class="field"><label>Contact name (on-site person) 联络人</label><input id="nj-contactname" placeholder="e.g. Jaskirath / Mdm Yeong" oninput="updateExcelLine()"></div>
+           
             <div class="field"><label>Contact phone number 联络号码</label><input id="nj-contact" placeholder="9XXX XXXX" oninput="updateExcelLine()"></div>
             <div class="field"><label>JO number</label><input id="nj-jo" placeholder="e.g. JO-1234" oninput="updateExcelLine()"></div>
-            <div class="field"><label>Street name / Condo 街名</label><input id="nj-street" placeholder="e.g. Lumina Grand" oninput="updateExcelLine()"></div>
-            <div class="field"><label>Blk / Unit 门牌</label><input id="nj-blkunit" placeholder="e.g. 19 #03-33" oninput="updateExcelLine()"></div>
+            <div class="field"><label>Street name / Condo 街名</label><input id="nj-street" placeholder="e.g. Lumina Grand" oninput="updateExcelLine();njCheckCondoColour()"></div>
+            <div class="field"><label>Blk / Unit 门牌</label><input id="nj-blkunit" placeholder="e.g. 19 #03-33" oninput="updateExcelLine();njCheckCondoColour()"></div>
             <div class="field"><label>Company (if trade) 公司</label><input id="nj-company" placeholder="—"></div>
             <div class="field"><label>PO / Order number</label><input id="nj-po" placeholder="OI-2026-001"></div>
             <div class="field"><label>Sales person 销售员</label><select id="nj-sales" onchange="updateExcelLine()"><option>Chris</option><option>Alice</option><option>Jennifer</option><option>Other</option></select></div>
-            <div class="field"><label>Assign to installer 委派</label><select id="nj-installer"><option>Oscar</option><option>Team A</option><option>Team B</option><option>Other</option></select></div>
+            <div class="field"><label>Assign to installer 委派</label><select id="nj-installer"><option>Oscar</option><option>Team A</option><option>Team B</option><option>Admin to assign</option><option>Other</option></select></div>
           </div>
         </div>
         <div class="form-section">
@@ -291,6 +292,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
             </div>
             <div class="field"><label>No. of sets 套数 <span style="font-weight:400;color:var(--text-secondary)">(auto-totalled)</span></label><input id="nj-sets" type="number" min="1" max="20" value="1" readonly style="background:var(--bg-secondary)"></div>
             <div class="field"><label>No. of balconies 阳台数 <span style="font-weight:400;color:var(--text-secondary)">(from list below)</span></label><input id="nj-balconies" type="number" value="1" readonly style="background:var(--bg-secondary)"></div>
+            <div class="field"><label>No. of fixed panels</label><input id="nj-fixedpanels" type="number" min="0" value="0"></div>
           </div>
           <div id="nj-smart-defaults" style="margin-top:6px;padding:8px 12px;background:var(--blue-bg);color:var(--blue-text);border-radius:var(--radius-md);font-size:12px;display:none"></div>
 
@@ -366,12 +368,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
           </div>
           <div class="divider"></div>
           <div class="form-grid three">
-            <div class="site-check"><input type="checkbox" id="nj-zwave" onchange="updateExcelLine();njUpdateMotorFieldVisibility()"><label for="nj-zwave">Z-Wave motor</label></div>
-            <div class="site-check"><input type="checkbox" id="nj-zigbee" onchange="updateExcelLine();njUpdateMotorFieldVisibility()"><label for="nj-zigbee">Zigbee motor</label></div>
-            <div class="site-check"><input type="checkbox" id="nj-matter" onchange="updateExcelLine();njUpdateMotorFieldVisibility()"><label for="nj-matter">Matter box 智能盒</label></div>
-            <div class="site-check"><input type="checkbox" id="nj-rain" onchange="updateExcelLine()"><label for="nj-rain">Rain sensor 雨感</label></div>
-            <div class="site-check"><input type="checkbox" id="nj-remote"><label for="nj-remote">Remote control 遥控</label></div>
-            <div class="site-check"><input type="checkbox" id="nj-fan" onchange="njFanToggle()"><label for="nj-fan">Möwe fan 风扇</label></div>
+            <div class="site-check"><input type="checkbox" id="nj-zwave" onchange="updateExcelLine();njUpdateMotorFieldVisibility()"><label for="nj-zwave">Z-Wave module</label></div>
+<div class="site-check"><input type="checkbox" id="nj-zigbee" onchange="updateExcelLine();njUpdateMotorFieldVisibility()"><label for="nj-zigbee">Zigbee module</label></div>
+<div class="site-check"><input type="checkbox" id="nj-matter" onchange="updateExcelLine();njUpdateMotorFieldVisibility()"><label for="nj-matter">Matter box 智能盒</label></div>
+<div class="site-check"><input type="checkbox" id="nj-mattermodule" onchange="updateExcelLine()"><label for="nj-mattermodule">Matter module</label></div>
+<div class="site-check"><input type="checkbox" id="nj-connectorhub" onchange="updateExcelLine()"><label for="nj-connectorhub">ConnectorHub</label></div>
+<div class="site-check"><input type="checkbox" id="nj-rain" onchange="updateExcelLine()"><label for="nj-rain">Rain sensor 雨感</label></div>
+<div class="site-check"><input type="checkbox" id="nj-rainmowe" onchange="updateExcelLine()"><label for="nj-rainmowe">Rain sensor (Möwe)</label></div>
+<div class="site-check"><input type="checkbox" id="nj-remote"><label for="nj-remote">Remote control 遥控</label></div>
+<div class="site-check"><input type="checkbox" id="nj-fan" onchange="njFanToggle()"><label for="nj-fan">Möwe fan 风扇</label></div>
           </div>
           <div id="nj-fan-delivery-field" style="display:none;margin-top:8px;max-width:320px" class="field">
             <label>Möwe fan delivery</label>
@@ -4892,6 +4897,17 @@ function stockSubmitCutResult(){
 // ── New Job — stock check, timeline, and reservation ──────────────────────────────
 // Lets Sales see stock availability live during job confirmation, instead of finding
 // out later that stock can't cover what was just promised to the owner.
+ function njCheckCondoColour(){
+  const street = document.getElementById('nj-street')?.value||'';
+  const blkunit = document.getElementById('nj-blkunit')?.value||'';
+  const addr = (street+' '+blkunit).toLowerCase();
+  const all = getCondoRecords();
+  const match = all.find(c=>addr.includes(c.condo.toLowerCase()));
+  const el = document.getElementById('nj-condo-match');
+  if(!el) return;
+  if(!match || !addr.trim()){ el.style.display='none'; return; }
+  el.style.display='block';
+  el.innerHTML = `📋 <b>${match.condo}</b> record — Frame: <b>${match.frame||'—'}</b> · Fabric: <b>${match.fabric||'—'}</b>. Please confirm frame/fabric colour above matches this before proceeding.`; 
 function njPopulateStockDropdowns(){
   // Fabric is shared stock (Phifer) independent of which zip system the job uses —
   // the same roll can be cut for either a Toscana or SHY panel.
@@ -7045,17 +7061,13 @@ function csvEscapeField(field){
 function updateExcelLine(){
   const outEl=document.getElementById('nj-excel-line'); if(!outEl) return;
   if(outEl._userEdited) return; // don't clobber manual edits
-  const name=document.getElementById('nj-name')?.value||'';
-  const jo=document.getElementById('nj-jo')?.value||'';
   const street=document.getElementById('nj-street')?.value||'';
   const blkunit=document.getElementById('nj-blkunit')?.value||'';
   const contactname=document.getElementById('nj-contactname')?.value||'';
   const desc=generateJobDescription();
   const phone=document.getElementById('nj-contact')?.value||'';
   const sales=document.getElementById('nj-sales')?.value||'';
-  // Tab-separated so pasting into Excel/Sheets lands each value in its own column (B onward).
-  // Each field is escaped so the multi-line Description stays inside one cell.
-  outEl.value=[name,jo,street,blkunit,contactname,desc,phone,sales].map(csvEscapeField).join('\t');
+  outEl.value=[street,blkunit,contactname,desc,phone,sales].map(csvEscapeField).join('\t');
 }
 
 function copyExcelLine(){
