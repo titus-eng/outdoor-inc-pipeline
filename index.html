@@ -7023,6 +7023,8 @@ function generateJobDescription(){
   const sets=document.getElementById('nj-sets')?.value||1;
   const balconies=document.getElementById('nj-balconies')?.value||1;
   const lines=[`${sysLabel} measurement ${sets} sets, ${balconies} balcon${balconies==1?'y':'ies'}`];
+  const fixedPanels=parseInt(document.getElementById('nj-fixedpanels')?.value)||0;
+  if(fixedPanels>0) lines.push(`${fixedPanels} fixed panel${fixedPanels>1?'s':''}`);
 
   if(document.getElementById('nj-zwave')?.checked) lines.push('Z-Wave motor');
   if(document.getElementById('nj-zigbee')?.checked) lines.push('Zigbee motor');
