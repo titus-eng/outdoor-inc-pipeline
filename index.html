@@ -4907,7 +4907,9 @@ function stockSubmitCutResult(){
   if(!el) return;
   if(!match || !addr.trim()){ el.style.display='none'; return; }
   el.style.display='block';
-  el.innerHTML = `📋 <b>${match.condo}</b> record — Frame: <b>${match.frame||'—'}</b> · Fabric: <b>${match.fabric||'—'}</b>. Please confirm frame/fabric colour above matches this before proceeding.`; 
+  el.innerHTML = `📋 <b>${match.condo}</b> record — Frame: <b>${match.frame||'—'}</b> · Fabric: <b>${match.fabric||'—'}</b>. Please confirm frame/fabric colour above matches this before proceeding.`;
+}
+
 function njPopulateStockDropdowns(){
   // Fabric is shared stock (Phifer) independent of which zip system the job uses —
   // the same roll can be cut for either a Toscana or SHY panel.
