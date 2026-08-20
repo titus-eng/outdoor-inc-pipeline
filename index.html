@@ -90,7 +90,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 .sets-table td{padding:6px 8px;border-bottom:0.5px solid var(--border-tertiary)}
 .sets-table input,.sets-table select{width:100%;padding:6px 6px;font-size:12px;border:0.5px solid var(--border-tertiary);border-radius:4px;background:var(--bg-primary);color:var(--text-primary)}
 .sets-table .calc{color:var(--text-secondary);font-size:11px;background:var(--bg-secondary);text-align:right;padding-right:8px;font-weight:600}
-.sketch-canvas{width:100%;height:220px;border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);background:var(--bg-secondary);cursor:crosshair;touch-action:none;display:block}
+.sketch-canvas{width:100%;height:330px;border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);background:var(--bg-secondary);cursor:crosshair;touch-action:none;display:block}
 .sketch-tools{display:flex;gap:6px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
 .sketch-tool{padding:6px 12px;font-size:12px;border:0.5px solid var(--border-tertiary);border-radius:4px;cursor:pointer;background:var(--bg-primary);color:var(--text-secondary)}
 .sketch-tool.active{background:var(--green-bg);color:var(--green-text);border-color:#9FE1CB}
@@ -564,7 +564,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
               <div class="sketch-tool" onclick="deckClear()"><i class="ti ti-trash"></i> Clear</div>
             </div>
             <div style="position:relative">
-              <canvas id="deckCanvas" width="900" height="260" style="width:100%;height:260px;border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);background:#fff;cursor:crosshair;display:block;touch-action:none"></canvas>
+              <canvas id="deckCanvas" width="900" height="390" style="width:100%;height:390px;border:0.5px solid var(--border-tertiary);border-radius:var(--radius-md);background:#fff;cursor:crosshair;display:block;touch-action:none"></canvas>
               <div id="deckLabelInputBox" style="display:none;position:absolute;top:0;left:0;z-index:50;background:var(--bg-primary);border:1.5px solid #0369A1;border-radius:8px;padding:6px 8px;box-shadow:0 4px 16px rgba(0,0,0,0.18);min-width:180px">
                 <input id="deckLabelInputField" type="text" placeholder="e.g. 2400, decking board…"
                   style="width:100%;padding:6px 8px;font-size:13px;border:0.5px solid var(--border-tertiary);border-radius:6px;background:var(--bg-secondary);color:var(--text-primary);box-sizing:border-box">
@@ -627,7 +627,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
               <span style="font-size:10px;color:var(--text-secondary);align-self:center">Columns auto-placed at 47×125 right-angle corners — add power point, dimensions &amp; details after inserting</span>
             </div>
             <div style="position:relative;display:block">
-              <canvas class="sketch-canvas" id="sketchCanvas" width="900" height="280"></canvas>
+              <canvas class="sketch-canvas" id="sketchCanvas" width="900" height="420"></canvas>
               <!-- Inline label input — appears when Label tool taps the canvas -->
               <div id="labelInputBox" style="display:none;position:absolute;top:0;left:0;z-index:50;background:var(--bg-primary);border:1.5px solid var(--green);border-radius:8px;padding:6px 8px;box-shadow:0 4px 16px rgba(0,0,0,0.18);min-width:180px">
                 <div style="font-size:11px;font-weight:600;color:var(--green);margin-bottom:4px">Enter label text:</div>
